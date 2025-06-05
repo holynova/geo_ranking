@@ -18,7 +18,7 @@ pnpm-debug.log*
 Thumbs.db
 
 # AI/工具生成的缓存
-.cursor/
+# .cursor/
 
 # 生产环境不会用到的锁文件（如只用 npm，可忽略 pnpm/yarn）
 pnpm-lock.yaml
