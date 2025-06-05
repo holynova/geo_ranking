@@ -1,0 +1,54 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Generates a new React functional component based on a standard template, including props interface and basic structure. References @/templates/react-component-template.tsx for the boilerplate."
+globs: ["src/components/**/*.tsx"] # Typically used when explicitly asked to create a new component
+# This rule might be better as 'Agent Requested' or 'Manual' if not always creating components with this exact structure.
+# For this example, let's assume it's auto-attached for demonstration of @file reference.
+alwaysApply: false
+---
+# Standard React Component Template
+
+When asked to create a new React component named `[ComponentName]`, follow this structure and use the provided template file `@/templates/react-component-template.tsx` as a base.
+
+**Instructions:**
+
+1.  **Props Interface**: Define a props interface named `[ComponentName]Props` at the top of the file.
+    -   Clearly type all props.
+    -   Provide JSDoc comments for non-obvious props.
+2.  **Component Function**: Implement the component as a named functional component `[ComponentName]` using `React.FC<[ComponentName]Props>`.
+3.  **Named Export**: Export the component as a named export. Also consider a default export if that's the project convention (though named exports are generally preferred for consistency).
+4.  **Styles**: If styles are needed, create a corresponding `[ComponentName].module.css` (CSS Modules) or `[ComponentName].styles.ts` (CSS-in-JS) file and import it. For this example, assume CSS Modules.
+5.  **Basic JSX Structure**: Include a root `div` with a BEM-style class name (e.g., `[component-name]`) and a placeholder for children or primary content.
+6.  **Referenced Template**: The file `@/templates/react-component-template.tsx` contains the basic boilerplate. Adapt it by replacing placeholders like `{{ComponentName}}` and `{{componentNameKebabCase}}`.
+
+**Example of how to use the referenced template (conceptual):**
+
+If `@/templates/react-component-template.tsx` contains:
+\`\`\`typescript
+// @/templates/react-component-template.tsx
+import React from 'react';
+import styles from './{{componentNameKebabCase}}.module.css';
+
+export interface {{ComponentName}}Props {
+  // TODO: Define props
+  children?: React.ReactNode;
+}
+
+const {{ComponentName}}: React.FC<{{ComponentName}}Props> = ({ children }) => {
+  return (
+    <div className={styles.{{componentNameKebabCase}}}>
+      {/* TODO: Implement component content */}
+      {children}
+    </div>
+  );
+};
+
+export default {{ComponentName}};
+\`\`\`
+
+
+When creating a component named `UserProfileCard`, the AI should generate a `UserProfileCard.tsx` file that adapts this template.

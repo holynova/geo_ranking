@@ -1,0 +1,57 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Guidelines for effective state management with useState, useEffect, and crafting reusable custom hooks in React."
+globs: ["src/components/**/*.tsx", "src/hooks/**/*.ts", "src/features/**/*.tsx"]
+alwaysApply: false
+---
+# React State and Custom Hooks Best Practices
+
+- **`useState`**:
+    - Provide a meaningful initial state.
+    - For state updates that depend on the previous state, use the functional update form: `setState(prevState => prevState + 1);`. [9]
+    - Group related state variables into a single state object if they often change together, but avoid overly large state objects.
+- **`useEffect`**:
+    - **Dependency Array**: Always provide a dependency array.
+        - Empty array ``: Effect runs once after initial render and cleanup on unmount.
+        - Array with dependencies `[var1, var2]`: Effect runs after initial render and whenever any dependency changes.
+        - No dependency array (avoid): Effect runs after every render.
+    - **Cleanup Function**: If the effect sets up subscriptions or event listeners, return a cleanup function to remove them when the component unmounts or before the effect runs again.
+      \`\`\`typescript
+      useEffect(() => {
+        const subscription = someService.subscribe(data => console.log(data));
+        return () => {
+          subscription.unsubscribe(); // Cleanup
+        };
+      },);
+      \`\`\`
+- **Custom Hooks**:
+    - Extract reusable component logic into custom hooks.
+    - Custom hook names must start with `use` (e.g., `useFormInput`, `useWindowSize`).
+    - Custom hooks can call other hooks.
+    - Clearly define the input parameters and return values of custom hooks using TypeScript.
+  \`\`\`typescript
+  // src/hooks/useToggle.ts
+  import { useState, useCallback } from 'react';
+
+  interface UseToggleOutput {
+    isOn: boolean;
+    toggle: () => void;
+    setOn: () => void;
+    setOff: () => void;
+  }
+
+  function useToggle(initialState: boolean = false): UseToggleOutput {
+    const [isOn, setIsOn] = useState(initialState);
+    const toggle = useCallback(() => setIsOn(prev =>!prev),);
+    const setOn = useCallback(() => setIsOn(true),);
+    const setOff = useCallback(() => setIsOn(false),);
+    return { isOn, toggle, setOn, setOff };
+  }
+
+  export default useToggle;
+
+  \`\`\`

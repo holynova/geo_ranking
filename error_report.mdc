@@ -1,0 +1,40 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Standardizes error handling in React applications, including usage of Error Boundaries, consistent logging, and custom error types for API interactions."
+globs: ["src/**/*.ts", "src/**/*.tsx"]
+alwaysApply: false
+---
+# Standardized Error Handling and Reporting
+
+- **Error Boundaries**:
+    - For React applications, wrap major sections of the UI or individual complex components with Error Boundary components.
+    - An Error Boundary should catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI.
+    - Example Error Boundary (conceptual, implement as needed):
+      \`\`\`tsx
+      // src/components/ErrorBoundary.tsx
+      // class ErrorBoundary extends React.Component<Props, State> {... }
+      \`\`\`
+    - Usage: `<ErrorBoundary><MyFeatureComponent /></ErrorBoundary>`
+- **API Error Handling**:
+    - All functions making API calls must use `try...catch` blocks.
+    - In the `catch` block:
+        - Log the detailed error using a designated logger (e.g., `logger.error('API call failed', error)`).
+        - If applicable, transform the error into a custom, more user-friendly error type (e.g., `ApiError`, `NetworkError`).
+        - Provide appropriate feedback to the user (e.g., via toast notifications, inline messages).
+    - Define custom error types for API responses to provide structured error information. [5]
+      \`\`\`typescript
+      // src/services/apiErrors.ts
+      export class ApiError extends Error {
+        constructor(message: string, public statusCode?: number, public details?: any) {
+          super(message);
+          this.name = 'ApiError';
+        }
+      }
+      \`\`\`
+- **Global Error Handling**: Consider a global error handler (e.g., using `window.onerror` and `window.onunhandledrejection`) to catch unhandled exceptions and report them to an error tracking service (e.g., Sentry, Bugsnag).
+
+- **Logging**: Use a consistent logging strategy. For client-side errors, include relevant context like component name, user state, and browser information.

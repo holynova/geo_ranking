@@ -1,0 +1,47 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Guides the implementation of API client services and data fetching strategies, recommending libraries like React Query or SWR, and consistent handling of loading/error states."
+globs: ["src/services/**/*.ts", "src/hooks/api/**/*.ts", "src/features/**/hooks/*.ts"]
+alwaysApply: false
+---
+# API Client and Data Fetching Strategy
+
+- **Recommended Library**: Use React Query (or SWR, if specified as project standard) for server state management, including data fetching, caching, synchronization, and updates.
+- **API Client Service**:
+    - Centralize API call logic in dedicated service files (e.g., `src/services/userService.ts`, `src/services/productService.ts`).
+    - These services should encapsulate the actual HTTP requests (e.g., using `axios` or `fetch`).
+    - Functions in these services should return Promises that resolve with the data or reject with a structured error (e.g., an instance of `ApiError`).
+- **Custom Hooks for Data Fetching**:
+    - For each API endpoint or data resource, create a custom hook (e.g., `useUserProfile`, `useProducts`) that wraps the React Query (or SWR) hook (e.g., `useQuery`, `useMutation`).
+    - These custom hooks should handle:
+        - Calling the appropriate API client service function.
+        - Providing query keys.
+        - Configuring options (e.g., `staleTime`, `cacheTime`, `retry`).
+        - Returning data, loading state, error state, and refetch/mutate functions.
+  \`\`\`typescript
+  // src/hooks/api/useUserProfile.ts
+  import { useQuery } from '@tanstack/react-query'; // Assuming React Query
+  import { getUserProfile, UserProfileData } from '@/services/userService';
+  import { ApiError } from '@/services/apiErrors';
+
+  const USER_PROFILE_QUERY_KEY = 'userProfile';
+
+  export function useUserProfile(userId: string) {
+    return useQuery<UserProfileData, ApiError, UserProfileData, [string, string]>(
+     ,
+      () => getUserProfile(userId),
+      {
+        enabled:!!userId, // Only run query if userId is provided
+        staleTime: 5 * 60 * 1000, // 5 minutes
+      }
+    );
+  }
+  \`\`\`
+- **Loading and Error States**: Components consuming these hooks must handle loading and error states gracefully (e.g., show skeletons/spinners for loading, display error messages).
+
+
+- **Optimistic Updates**: For mutations, consider implementing optimistic updates with React Query to improve perceived performance.

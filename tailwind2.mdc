@@ -1,0 +1,19 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Discourages the use of inline styles and unmanaged CSS classes when Tailwind CSS utilities are available."
+globs: ["**/*.tsx", "**/*.jsx", "**/*.html"]
+alwaysApply: false
+---
+# Tailwind CSS: Avoid Inline Styles and Unmanaged CSS
+
+- **No Inline Styles**: Strictly avoid using the `style` attribute for styling (e.g., `style={{ color: 'red' }}`). All styling should be managed through Tailwind classes or the `tailwind.config.js` theme. [1]
+- **No Arbitrary CSS Classes**: Do not create arbitrary CSS class names in global stylesheets if the desired styling can be achieved by combining Tailwind utilities.
+- **When Custom CSS is Necessary**: If a truly unique style or complex animation cannot be achieved with Tailwind utilities or plugins:
+    - Place custom CSS in a dedicated CSS Module file (e.g., `MyComponent.module.css`) or within a `@layer components` or `@layer utilities` directive in a global CSS file.
+    - Ensure custom classes are well-named and scoped to avoid conflicts.
+
+- **Leverage `tailwind.config.js`**: For project-wide design tokens (colors, spacing, fonts), define them in `tailwind.config.js` and use the generated utility classes.

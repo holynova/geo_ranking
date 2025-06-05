@@ -1,0 +1,37 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Enforces a standard folder structure for React components and consistent import paths."
+globs: ["src/**"] # Apply broadly to guide new component creation
+alwaysApply: false
+---
+# React Component Folder Structure and Imports
+
+- **Component Location**:
+    - Reusable, generic components: `src/components/ComponentName/ComponentName.tsx`
+    - Feature-specific components: `src/features/FeatureName/components/ComponentName/ComponentName.tsx`
+    - Page-level components: `src/pages/PageName/PageName.tsx` (or `src/app/page-route/page.tsx` for Next.js App Router)
+- **Component File Structure**: Each component `ComponentName` should ideally have its own folder:
+  \`\`\`
+  src/components/
+  └── Button/
+      ├── Button.tsx
+      ├── Button.module.css (or Button.styles.ts if using CSS-in-JS)
+      ├── Button.stories.tsx (for Storybook)
+      ├── Button.test.tsx
+      └── index.ts (for barrel exports)
+  \`\`\`
+- **Barrel Exports (`index.ts`)**: Use an `index.ts` file in component folders to re-export the main component and related types/hooks. This allows for cleaner imports:
+  \`\`\`typescript
+  // src/components/Button/index.ts
+  export { default } from './Button';
+  export * from './Button.types'; // If you have a Button.types.ts
+
+  // Usage in another file:
+  // import Button, { ButtonProps } from '@/components/Button';
+  \`\`\`
+
+- **Absolute Imports**: Configure and use absolute imports (e.g., `@/components/Button`) over deeply nested relative imports (`../../../components/Button`). This typically involves setting `baseUrl` and `paths` in `tsconfig.json`.

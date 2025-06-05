@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Reinforces the utility-first philosophy of Tailwind CSS. Prioritize using existing utility classes over custom CSS."
+globs: ["**/*.tsx", "**/*.jsx", "**/*.html"] # Where Tailwind is likely used
+alwaysApply: false
+---
+# Tailwind CSS: Utility-First Approach
+
+- **Prioritize Utilities**: Always attempt to style elements using Tailwind's utility classes directly in the HTML/JSX markup. [10]
+- **Avoid Custom CSS for Solvable Problems**: Do not write custom CSS (e.g., in `<style>` tags or separate CSS files) for styling that can be achieved with existing Tailwind utilities or by customizing `tailwind.config.js`.
+- **Composition**: Achieve complex styles by composing multiple utility classes.
+- **Readability**: While composing, ensure class strings remain readable. Consider Prettier plugins for Tailwind CSS class sorting if not already in use.
+
+Example:
+\`\`\`jsx
+// Good: Using Tailwind utilities
+<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  Click Me
+</button>
+
+// Avoid: Inline styles or unnecessary custom CSS if Tailwind can do it
+// <button style={{ backgroundColor: 'blue', color: 'white',... }}>Click Me</button>
+
+// <button className="my-custom-button">Click Me</button> \`\`\`

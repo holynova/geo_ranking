@@ -1,0 +1,55 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Ensures newly generated React components incorporate basic accessibility (A11y) features."
+globs: ["src/components/**/*.tsx", "src/features/**/*.tsx"]
+alwaysApply: false
+---
+# Accessibility (A11y) in React Components
+
+When generating interactive UI elements, ensure they are accessible:
+
+- **Semantic HTML**: Use semantic HTML elements (`<button>`, `<nav>`, `<article>`, etc.) wherever appropriate, as they have built-in accessibility features.
+- **Interactive Elements**: For custom interactive elements (e.g., a `div` acting as a button):
+    - Add `role="button"` (or other appropriate ARIA role).
+    - Add `tabindex="0"` to make it focusable via keyboard. [10]
+    - Provide an accessible name using `aria-label` if the element's content doesn't provide a sufficient label. [10]
+    - Implement keyboard event handlers (e.g., `onKeyDown` for `Enter` or `Space` to activate a custom button). [10]
+- **Images**: All `<img>` tags must have an `alt` attribute. If the image is purely decorative, use `alt=""`.
+- **Form Controls**:
+    - Every form input (`<input>`, `<textarea>`, `<select>`) must have an associated `<label>`. Use `htmlFor` on the label pointing to the `id` of the input.
+    - Use `aria-describedby` to link inputs to error messages or helper text.
+- **ARIA Attributes**: Use ARIA (Accessible Rich Internet Applications) attributes judiciously to provide additional semantics where HTML alone is insufficient (e.g., `aria-expanded`, `aria-hidden`, `aria-live`).
+- **Focus Management**: Ensure logical focus order and visible focus indicators. For complex interactions like modals or dropdowns, manage focus appropriately.
+
+Example for a custom clickable div:
+\`\`\`tsx
+interface ClickableDivProps extends React.HTMLAttributes<HTMLDivElement> {
+  label: string;
+}
+
+const ClickableDiv: React.FC<ClickableDivProps> = ({ label, onClick,...rest }) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Enter' |
+| event.key === ' ') {
+      onClick?.(event as any); // Type assertion might be needed depending on onClick signature
+    }
+  };
+
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+      onClick={onClick}
+      onKeyDown={handleKeyDown}
+      {...rest}
+    >
+      {label}
+    </div>
+  );
+};
+\`\`\`

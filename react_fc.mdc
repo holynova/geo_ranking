@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: "Promotes functional components in React, proper prop typing with React.FC and interfaces, and correct hook usage."
+globs: ["src/components/**/*.tsx", "src/pages/**/*.tsx", "src/features/**/*.tsx"]
+alwaysApply: false
+---
+# React Functional Component Architecture
+
+- **Prefer Functional Components**: Always create React components as functional components using arrow functions, unless a class component is strictly necessary for legacy reasons or specific lifecycle methods not covered by hooks. [5, 9]
+  \`\`\`typescript
+  // Good
+  const MyComponent: React.FC<MyComponentProps> = (props) => { /*... */ };
+
+  // Avoid (unless necessary)
+  // class MyClassComponent extends React.Component<MyClassProps, MyState> { /*... */ }
+  \`\`\`
+- **Prop Typing**:
+    - Use `React.FC<PropsInterfaceName>` for typing functional components with props. [9]
+    - Define props using a TypeScript `interface` named `ComponentNameProps`.
+    - Clearly document each prop with JSDoc comments if its purpose is not immediately obvious.
+  \`\`\`typescript
+  interface UserCardProps {
+    /** The unique identifier for the user */
+    userId: string;
+    /** Optional flag to show extended details */
+    showDetails?: boolean;
+  }
+
+  const UserCard: React.FC<UserCardProps> = ({ userId, showDetails = false }) => {
+    //...
+  };
+  \`\`\`
+- **Hook Usage**:
+    - Utilize `useState` and `useEffect` for state and side effects respectively. [9]
+    - Adhere to the Rules of Hooks (call at top level, only from React functions/custom hooks).
+
+- **No `this` in Functional Components**: Functional components do not have a `this` context in the same way class components do. Access props and state directly.
