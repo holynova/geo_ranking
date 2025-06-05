@@ -1,0 +1,29 @@
+# 依赖目录
+node_modules/
+
+# Vite/React 构建缓存
+dist/
+.vite/
+
+# VSCode/编辑器配置
+.vscode/
+.idea/
+
+# 日志和系统文件
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
+
+# AI/工具生成的缓存
+.cursor/
+
+# 生产环境不会用到的锁文件（如只用 npm，可忽略 pnpm/yarn）
+pnpm-lock.yaml
+yarn.lock
+
+# 其他常见忽略项
+*.local
+.env*
