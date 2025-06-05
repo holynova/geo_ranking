@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 ---
 description: "Reinforces the utility-first philosophy of Tailwind CSS. Prioritize using existing utility classes over custom CSS."
-globs: ["**/*.tsx", "**/*.jsx", "**/*.html"] # Where Tailwind is likely used
+globs: **/*.tsx,**/*.jsx,**/*.html
 alwaysApply: false
 ---
 # Tailwind CSS: Utility-First Approach

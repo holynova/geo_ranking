@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 ---
 description: "Enforces a standard folder structure for React components and consistent import paths."
-globs: ["src/**"] # Apply broadly to guide new component creation
+globs: src/**
 alwaysApply: false
 ---
 # React Component Folder Structure and Imports

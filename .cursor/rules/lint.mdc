@@ -5,13 +5,13 @@ alwaysApply: false
 ---
 ---
 description: "Guides AI to generate code that adheres to ESLint and Prettier configurations, focusing on React hooks and formatting."
-globs: ["**/*.tsx", "**/*.ts"]
+globs: **/*.tsx,**/*.ts
 alwaysApply: false # Apply when relevant, e.g., when generating new components or hooks
 ---
 # ESLint and Prettier Adherence
 
 - **React Hooks**: Ensure all React hooks (e.g., `useEffect`, `useState`) follow the Rules of Hooks. Specifically:
-    - Only call Hooks at the top level. Don’t call Hooks inside loops, conditions, or nested functions.
+    - Only call Hooks at the top level. Don't call Hooks inside loops, conditions, or nested functions.
     - Only call Hooks from React function components or custom Hooks.
 - **ESLint Comments**: If generating code that might temporarily violate a lint rule (e.g., during scaffolding), include an appropriate ESLint disable comment with a TODO to fix it:
   \`\`\`typescript

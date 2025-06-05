@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 ---
 description: "Ensures newly generated React components incorporate basic accessibility (A11y) features."
-globs: ["src/components/**/*.tsx", "src/features/**/*.tsx"]
+globs: src/components/**/*.tsx,src/features/**/*.tsx
 alwaysApply: false
 ---
 # Accessibility (A11y) in React Components

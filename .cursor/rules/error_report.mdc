@@ -33,3 +33,5 @@ alwaysApply: false
 - **Global Error Handling**: Consider a global error handler (e.g., using `window.onerror` and `window.onunhandledrejection`) to catch unhandled exceptions and report them to an error tracking service (e.g., Sentry, Bugsnag).
 
 - **Logging**: Use a consistent logging strategy. For client-side errors, include relevant context like component name, user state, and browser information.
+
+globs: src/**/*.ts,src/**/*.tsx

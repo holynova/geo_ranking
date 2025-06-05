@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 ---
 description: "Guides the implementation of API client services and data fetching strategies, recommending libraries like React Query or SWR, and consistent handling of loading/error states."
-globs: ["src/services/**/*.ts", "src/hooks/api/**/*.ts", "src/features/**/hooks/*.ts"]
+globs: src/services/**/*.ts,src/hooks/api/**/*.ts,src/features/**/hooks/*.ts
 alwaysApply: false
 ---
 # API Client and Data Fetching Strategy

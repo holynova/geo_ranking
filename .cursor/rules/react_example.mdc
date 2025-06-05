@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 ---
 description: "Generates a new React functional component based on a standard template, including props interface and basic structure. References @/templates/react-component-template.tsx for the boilerplate."
-globs: ["src/components/**/*.tsx"] # Typically used when explicitly asked to create a new component
+globs: src/components/**/*.tsx
 # This rule might be better as 'Agent Requested' or 'Manual' if not always creating components with this exact structure.
 # For this example, let's assume it's auto-attached for demonstration of @file reference.
 alwaysApply: false

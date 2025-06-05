@@ -5,7 +5,7 @@ alwaysApply: false
 ---
 ---
 description: "Guides AI to use theme-consistent Tailwind CSS classes and apply specific class combinations for common UI elements like buttons and cards, adhering to project's design system defined in tailwind.config.js."
-globs: ["src/components/**/*.tsx", "src/features/**/*.tsx"]
+globs: src/components/**/*.tsx,src/features/**/*.tsx
 alwaysApply: false
 ---
 # Tailwind CSS: Consistent and Themed Class Application
