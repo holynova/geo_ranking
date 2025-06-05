@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Ensures newly generated React components incorporate basic accessibility (A11y) features."
 globs: src/components/**/*.tsx,src/features/**/*.tsx
 alwaysApply: false

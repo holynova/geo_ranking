@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Promotes functional components in React, proper prop typing with React.FC and interfaces, and correct hook usage."
 globs: src/components/**/*.tsx,src/pages/**/*.tsx,src/features/**/*.tsx
 alwaysApply: false

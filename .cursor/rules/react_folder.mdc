@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Enforces a standard folder structure for React components and consistent import paths."
 globs: src/**
 alwaysApply: false

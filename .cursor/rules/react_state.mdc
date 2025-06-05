@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Guidelines for effective state management with useState, useEffect, and crafting reusable custom hooks in React."
 globs: src/components/**/*.tsx,src/hooks/**/*.ts,src/features/**/*.tsx
 alwaysApply: false

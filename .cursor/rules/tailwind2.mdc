@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Discourages the use of inline styles and unmanaged CSS classes when Tailwind CSS utilities are available."
 globs: **/*.tsx,**/*.jsx,**/*.html
 alwaysApply: false

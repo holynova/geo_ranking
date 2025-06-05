@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Standardizes naming conventions across the project for files, folders, variables, functions, and components."
 alwaysApply: true
 ---

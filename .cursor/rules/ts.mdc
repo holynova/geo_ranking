@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Enforces TypeScript strict mode and best practices for type definitions."
 globs: **/*.ts,**/*.tsx
 alwaysApply: true

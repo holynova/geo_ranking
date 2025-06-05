@@ -1,6 +1,6 @@
 ---
 description: "Standardizes error handling in React applications, including usage of Error Boundaries, consistent logging, and custom error types for API interactions."
-globs: ["src/**/*.ts", "src/**/*.tsx"]
+globs: src/**/*.ts,src/**/*.tsx
 alwaysApply: false
 ---
 # Standardized Error Handling and Reporting

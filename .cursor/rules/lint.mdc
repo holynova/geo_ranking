@@ -1,9 +1,4 @@
 ---
-description: 
-globs: 
-alwaysApply: false
----
----
 description: "Guides AI to generate code that adheres to ESLint and Prettier configurations, focusing on React hooks and formatting."
 globs: **/*.tsx,**/*.ts
 alwaysApply: false # Apply when relevant, e.g., when generating new components or hooks
