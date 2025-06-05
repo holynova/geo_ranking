@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+import ResultList from './components/ResultList/ResultList'
+import './index.css'
 
 interface PoiResult {
   category: string;
@@ -139,20 +141,29 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-4">
+    <div className="min-h-screen w-full flex flex-col items-center bg-gradient-to-b from-cyan-100 to-blue-200 p-2 sm:p-4">
+      {/* 顶部标题卡片 */}
+      <div className="w-full max-w-xl rounded-2xl bg-white/80 shadow-lg p-6 mb-4 flex flex-col items-center border-2 border-green-200">
+        <div className="flex items-center mb-2">
+          <span className="text-3xl mr-2">🏙️</span>
+          <span className="text-2xl font-bold text-green-700">地理位置便利性分析</span>
+        </div>
+        <div className="text-gray-600 text-center text-base">输入地址，快速了解周边生活设施和交通信息</div>
+      </div>
+      {/* 输入区卡片 */}
       <form
-        className="w-full max-w-md bg-white rounded-lg shadow p-4 mb-4"
+        className="w-full max-w-xl rounded-2xl bg-white/90 shadow-lg p-6 mb-6 border-2 border-green-100"
         onSubmit={handleQuery}
         aria-label="地址查询表单"
       >
-        <label htmlFor="address" className="block text-sm font-medium mb-2">
-          请输入中文地址：
+        <label htmlFor="address" className="block text-lg font-bold text-green-700 mb-2 flex items-center">
+          <span className="text-xl mr-2">📍</span>输入查询地址
         </label>
         <input
           id="address"
           type="text"
-          className="w-full border rounded px-3 py-2 mb-2 focus:outline-none focus:ring"
-          placeholder="如：北京市朝阳区团结湖"
+          className="w-full border-2 border-green-200 rounded-2xl px-4 py-3 mb-4 text-lg focus:outline-none focus:ring-2 focus:ring-green-400 bg-green-50 placeholder-gray-400"
+          placeholder="三里屯"
           value={address}
           onChange={e => setAddress(e.target.value)}
           required
@@ -160,42 +171,17 @@ function App() {
         />
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+          className="w-full py-3 text-lg font-bold rounded-2xl bg-gradient-to-r from-green-400 to-lime-400 text-white shadow-md hover:from-green-500 hover:to-lime-500 transition"
           disabled={loading}
         >
-          {loading ? '查询中...' : '查询'}
+          {loading ? '分析中...' : '开始分析'}
         </button>
-        {error && <div className="text-red-600 mt-2" role="alert">{error}</div>}
+        {error && <div className="text-red-600 mt-2 text-sm" role="alert">{error}</div>}
       </form>
-      <div className="w-full max-w-md">
+      {/* 结果展示区 */}
+      <div className="w-full max-w-xl">
         {Object.keys(results).length > 0 && (
-          <div className="space-y-6">
-            {POI_CATEGORIES.map(({ label }) => (
-              <div key={label}>
-                <h2 className="text-lg font-semibold mb-2">{label}</h2>
-                <ul className="space-y-2">
-                  {results[label]?.length ? (
-                    results[label].map((poi, idx) => (
-                      <li
-                        key={poi.name + idx}
-                        className="bg-white rounded shadow p-3 flex flex-col"
-                        tabIndex={0}
-                        aria-label={`${poi.category}：${poi.name}`}
-                      >
-                        <div className="font-medium">{poi.name}</div>
-                        <div className="text-sm text-gray-600">直线距离：{poi.distance}</div>
-                        <div className="text-sm text-gray-600">驾车时间：{poi.drivingTime}</div>
-                        <div className="text-sm text-gray-600">公交/地铁时间：{poi.transitTime}</div>
-                        <div className="text-sm text-gray-600">电动车骑行时间：{poi.cyclingTime}</div>
-                      </li>
-                    ))
-                  ) : (
-                    <li className="text-gray-400">10公里内无结果</li>
-                  )}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <ResultList results={results} poiCategories={POI_CATEGORIES} />
         )}
       </div>
       <footer className="mt-8 text-xs text-gray-400">数据来源：高德地图API</footer>
