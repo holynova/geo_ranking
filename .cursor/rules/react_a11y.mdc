@@ -1,6 +1,6 @@
 ---
 description: "Ensures newly generated React components incorporate basic accessibility (A11y) features."
-globs: src/components/**/*.tsx,src/features/**/*.tsx
+globs: src/**/*.ts,src/**/*.tsx
 alwaysApply: false
 ---
 # Accessibility (A11y) in React Components
