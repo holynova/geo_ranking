@@ -1,19 +1,5 @@
 import React from 'react';
-
-export interface PoiResult {
-  category: string;
-  name: string;
-  location: string;
-  distance: string;
-  drivingTime: string;
-  transitTime: string;
-  cyclingTime: string;
-}
-
-export interface PoiCategory {
-  label: string;
-  code: string;
-}
+import type { PoiResult, PoiCategory } from '../../types/amap';
 
 const CATEGORY_ICONS: Record<string, string> = {
   '地铁站': '🚇',
