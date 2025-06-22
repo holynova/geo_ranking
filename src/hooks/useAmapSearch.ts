@@ -16,7 +16,10 @@ export function useAmapSearch() {
   const [error, setError] = useState<string | null>(null);
   const [results, setResults] = useState<Record<string, PoiResult[]>>({});
 
-  const handleSearch = async (address: string) => {
+  const handleSearch = async (
+    address: string,
+    categories: PoiCategory[] = POI_CATEGORIES
+  ) => {
     if (!address) {
       setError('请输入地址');
       return;
@@ -42,7 +45,7 @@ export function useAmapSearch() {
       }
       const [lng, lat] = location.split(',');
 
-      const poiPromises = POI_CATEGORIES.map(async (category) => {
+      const poiPromises = categories.map(async (category) => {
         const pois = await fetchPois(lng, lat, category.code);
         const detailedPois: PoiResult[] = [];
 
