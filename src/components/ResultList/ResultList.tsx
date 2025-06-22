@@ -30,28 +30,62 @@ const ResultList: React.FC<ResultListProps> = ({ results, poiCategories }) => {
               {label}
             </h2>
           </div>
-          <ul className="space-y-4">
-            {results[label]?.length ? (
-              results[label].map((poi, idx) => (
-                <li
-                  key={poi.name + idx}
-                  className="rounded-xl bg-green-50 border border-green-100 shadow p-4 flex flex-col mb-2"
-                  tabIndex={0}
-                  aria-label={`${poi.category}：${poi.name}`}
-                >
-                  <div className="font-bold text-green-800 text-lg mb-2">{poi.name}</div>
-                  <div className="flex flex-col gap-1 text-base text-gray-700">
-                    <div><span className="mr-1">✏️</span>直线距离: {poi.distance}</div>
-                    <div><span className="mr-1">🚗</span>驾车: {poi.drivingTime}</div>
-                    <div><span className="mr-1">🚌</span>公交: {poi.transitTime}</div>
-                    <div><span className="mr-1">🚴‍♂️</span>骑行: {poi.cyclingTime}</div>
+
+          {/* Responsive container */}
+          <div>
+            {/* Table Header for small screens and up */}
+            <div className="hidden sm:flex flex-row bg-green-100/50 rounded-t-lg">
+              <div className="p-3 text-left text-sm font-semibold text-green-800 w-1/3">名称</div>
+              <div className="p-3 text-left text-sm font-semibold text-green-800 w-1/6">
+                <span className="mr-1 hidden lg:inline">✏️</span>直线距离
+              </div>
+              <div className="p-3 text-left text-sm font-semibold text-green-800 w-1/6">
+                <span className="mr-1 hidden lg:inline">🚗</span>驾车
+              </div>
+              <div className="p-3 text-left text-sm font-semibold text-green-800 w-1/6">
+                <span className="mr-1 hidden lg:inline">🚌</span>公交
+              </div>
+              <div className="p-3 text-left text-sm font-semibold text-green-800 w-1/6">
+                <span className="mr-1 hidden lg:inline">🚴‍♂️</span>骑行
+              </div>
+            </div>
+
+            {/* Results List */}
+            <div className="sm:border-t-0">
+              {results[label]?.length ? (
+                results[label].map((poi, idx) => (
+                  <div
+                    key={poi.name + idx}
+                    className="flex flex-col sm:flex-row sm:items-center py-4 px-2 sm:p-0 border-b border-green-100 hover:bg-green-50/80 transition-colors duration-150"
+                  >
+                    <div className="sm:w-1/3 sm:p-3 text-base text-gray-800 font-medium">{poi.name}</div>
+
+                    <div className="flex flex-row items-center pt-2 sm:pt-0 sm:w-1/6 sm:p-3">
+                      <span className="sm:hidden text-sm font-semibold text-gray-600 w-24">✏️ 直线距离:</span>
+                      <span className="text-base text-gray-700">{poi.distance}</span>
+                    </div>
+
+                    <div className="flex flex-row items-center pt-1 sm:pt-0 sm:w-1/6 sm:p-3">
+                      <span className="sm:hidden text-sm font-semibold text-gray-600 w-24">🚗 驾车:</span>
+                      <span className="text-base text-gray-700">{poi.drivingTime}</span>
+                    </div>
+
+                    <div className="flex flex-row items-center pt-1 sm:pt-0 sm:w-1/6 sm:p-3">
+                      <span className="sm:hidden text-sm font-semibold text-gray-600 w-24">🚌 公交:</span>
+                      <span className="text-base text-gray-700">{poi.transitTime}</span>
+                    </div>
+
+                    <div className="flex flex-row items-center pt-1 sm:pt-0 sm:w-1/6 sm:p-3">
+                      <span className="sm:hidden text-sm font-semibold text-gray-600 w-24">🚴‍♂️ 骑行:</span>
+                      <span className="text-base text-gray-700">{poi.cyclingTime}</span>
+                    </div>
                   </div>
-                </li>
-              ))
-            ) : (
-              <li className="text-gray-400">10公里内无结果</li>
-            )}
-          </ul>
+                ))
+              ) : (
+                <div className="p-4 text-center text-gray-400">10公里内无结果</div>
+              )}
+            </div>
+          </div>
         </section>
       ))}
     </div>
