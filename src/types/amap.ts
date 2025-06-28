@@ -69,6 +69,8 @@ export interface PoiResult {
   drivingTime: string;
   transitTime: string;
   cyclingTime: string;
+  longitude?: string;
+  latitude?: string;
 }
 
 export interface PoiCategory {

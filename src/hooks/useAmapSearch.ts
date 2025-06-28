@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { PoiCategory, PoiResult } from '../types/amap';
 import { fetchPois, fetchRouteInfo, delay, fetchGeocode } from '../services/amap';
+import { mergeAllPoiResults } from '../utils/poiMerge';
 
 export const POI_CATEGORIES: PoiCategory[] = [
   { label: '地铁站', code: '150500' },
@@ -57,6 +58,8 @@ export function useAmapSearch() {
               name: poi.name,
               location: poi.address,
               ...routeInfo,
+              longitude: poi.location.split(',')[0],
+              latitude: poi.location.split(',')[1],
             });
             await delay(250);
           }
@@ -67,7 +70,10 @@ export function useAmapSearch() {
       const resultsArray = await Promise.all(poiPromises);
       const newResults = resultsArray.reduce((acc, current) => ({ ...acc, ...current }), {});
 
-      setResults(newResults);
+      // 合并相似的POI结果
+      const mergedResults = mergeAllPoiResults(newResults);
+
+      setResults(mergedResults);
     } catch (err) {
       console.error('An error occurred during search:', err);
       setError('搜索过程中发生错误，请稍后重试。');
